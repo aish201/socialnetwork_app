@@ -1,0 +1,82 @@
+<div class="container mt-5">
+  <div class="card shadow-sm border-0 rounded-4 p-4 bg-light">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <h3 class="fw-bold text-dark mb-0">
+        <i class="bi bi-exclamation-triangle-fill text-danger me-2"></i> All Complaints
+      </h3>
+    </div>
+
+    <!-- ✅ Empty State -->
+    <div *ngIf="complaints.length === 0" class="alert alert-info text-center rounded-pill py-2 fw-semibold">
+      No complaints available.
+    </div>
+
+    <!-- ✅ Complaints Table -->
+    <div *ngIf="complaints.length > 0" class="table-responsive mt-3">
+      <table class="table table-hover align-middle text-center">
+        <thead class="table-dark">
+          <tr>
+            <th>ID</th>
+            <th>Subject</th>
+            <th>Category</th>
+            <th>Priority</th>
+            <th>Description</th>
+            <th>Attachment</th>
+            <th>Status</th>
+            <th>User</th>
+            <th>Email</th>
+            <th>Created At</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let c of complaints">
+            <td>{{ c.id }}</td>
+            <td class="fw-semibold">{{ c.subject }}</td>
+            <td>{{ c.category }}</td>
+            <td>
+           <span class="badge"
+      [ngClass]="{
+        'bg-success': c.priority?.toLowerCase() === 'low',
+        'bg-warning text-dark': c.priority?.toLowerCase() === 'medium',
+        'bg-danger': c.priority?.toLowerCase() === 'high',
+        'bg-dark': c.priority?.toLowerCase() === 'urgent'
+      }">
+  {{ c.priority }}
+</span>
+
+            </td>
+            <td class="text-truncate" style="max-width: 200px;">{{ c.description }}</td>
+            <td>
+              <a *ngIf="c.attachmentUrl" [href]="c.attachmentUrl" target="_blank" class="text-decoration-none text-primary fw-semibold">
+                View
+              </a>
+            </td>
+
+            <td>
+              <select class="form-select form-select-sm rounded-pill fw-semibold"
+                      (change)="updateStatus(c.id, $any($event.target).value)">
+                <option [selected]="c.status === 'PENDING'">PENDING</option>
+                <option [selected]="c.status === 'IN_PROGRESS'">IN_PROGRESS</option>
+                <option [selected]="c.status === 'RESOLVED'">RESOLVED</option>
+                <option [selected]="c.status === 'CLOSED'">CLOSED</option>
+              </select>
+            </td>
+
+            <td class="text-capitalize">{{ c.username }}</td>
+            <td>{{ c.email }}</td>
+            <td>{{ c.createdAt | date: 'short' }}</td>
+            <td>
+              <button class="btn btn-outline-danger btn-sm rounded-pill px-3"
+                      (click)="deleteComplaint(c.id)">
+                Delete
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+

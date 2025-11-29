@@ -1,0 +1,71 @@
+<div class="report-card card shadow-sm border-0 p-4 mx-auto mt-4 rounded-4" style="max-width: 900px;">
+  <h4 class="mb-3 fw-semibold text-danger d-flex align-items-center">
+    <i class="bi bi-flag-fill me-2"></i> Report an Issue
+  </h4>
+
+  <form (ngSubmit)="submit()" #f="ngForm" novalidate>
+    <!-- Subject -->
+    <div class="mb-3">
+      <label class="form-label fw-semibold">Subject <span class="text-danger">*</span></label>
+      <input class="form-control form-control-sm rounded-3" name="subject" [(ngModel)]="form.subject" required maxlength="120" />
+      <div class="form-text text-end">{{ (form.subject?.length || 0) }}/120</div>
+    </div>
+
+    <!-- Category & Priority -->
+    <div class="row g-3">
+      <div class="col-md-6">
+        <label class="form-label fw-semibold">Category</label>
+        <select class="form-select form-select-sm rounded-3" name="category" [(ngModel)]="form.category">
+          <option>Bug</option>
+          <option>Abuse/Harassment</option>
+          <option>Security</option>
+          <option>Payment</option>
+          <option>Other</option>
+        </select>
+      </div>
+
+      <div class="col-md-6">
+        <label class="form-label fw-semibold">Priority</label>
+        <select class="form-select form-select-sm rounded-3" name="priority" [(ngModel)]="form.priority">
+          <option value="LOW">LOW</option>
+          <option value="MEDIUM">MEDIUM</option>
+          <option value="HIGH">HIGH</option>
+          <option value="URGENT">URGENT</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Description -->
+    <div class="mb-3 mt-3">
+      <label class="form-label fw-semibold">Description <span class="text-danger">*</span></label>
+      <textarea
+        class="form-control rounded-3"
+        rows="4"
+        name="description"
+        [(ngModel)]="form.description"
+        required minlength="10" maxlength="2000"
+        placeholder="Explain the issue clearly..."></textarea>
+      <div class="form-text text-end">{{ (form.description?.length || 0) }}/2000</div>
+    </div>
+
+    <!-- Attachment -->
+    <div class="mb-3">
+      <label class="form-label fw-semibold">Attachment (optional)</label>
+      <input type="file" class="form-control form-control-sm rounded-3" (change)="onFile($event)" accept="image/*,.pdf" />
+      <div *ngIf="fileName" class="form-text text-primary mt-1">
+        <i class="bi bi-paperclip me-1"></i> {{ fileName }}
+      </div>
+    </div>
+
+    <!-- Buttons -->
+    <div class="d-flex justify-content-end gap-2">
+      <button class="btn btn-outline-secondary btn-sm rounded-pill px-3" type="button" (click)="reset()">
+        Clear
+      </button>
+      <button class="btn btn-danger btn-sm rounded-pill px-3" type="submit" [disabled]="f.invalid || loading">
+        <span *ngIf="loading" class="spinner-border spinner-border-sm me-2"></span>
+        Submit
+      </button>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,20 @@
+.table {
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.table thead th {
+  background-color: #e8f0ff !important;
+  font-weight: 600;
+}
+
+.card {
+  background-color: #fafafa;
+}
+
+.btn-outline-danger:hover {
+  background-color: #dc3545;
+  color: #fff;
+  transform: translateY(-2px);
+  transition: 0.2s ease;
+}

@@ -1,0 +1,105 @@
+<div class="container mt-5">
+  <div class="card shadow-sm border-0 rounded-4 p-4 bg-light">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <h3 class="fw-bold text-dark mb-0">
+        <i class="bi bi-people-fill text-primary me-2"></i> Manage Users
+      </h3>
+    </div>
+
+    <!-- ✅ Success Message -->
+    <div *ngIf="successMessage" class="alert alert-success rounded-pill py-2 text-center fw-semibold shadow-sm">
+      {{ successMessage }}
+    </div>
+
+    <!-- ✅ Users Table -->
+    <div *ngIf="users && users.length > 0; else noUsers">
+      <div class="table-responsive">
+        <table class="table table-hover align-middle text-center">
+          <thead class="table-primary text-dark">
+            <tr>
+              <th>#</th>
+              <th>Username</th>
+              <th>Email</th>
+              <th>Role</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr *ngFor="let user of users; let i = index" class="align-middle">
+              <td>{{ i + 1 }}</td>
+              <td class="fw-semibold text-capitalize">{{ user.username }}</td>
+              <td>{{ user.email }}</td>
+              <td>
+                <span class="badge bg-info text-dark px-3 py-2 rounded-pill">
+                  {{ user.role.replace('ROLE_', '') }}
+                </span>
+              </td>
+              <td>
+                <span
+                  class="badge rounded-pill px-3 py-2"
+                  [ngClass]="user.active ? 'bg-success' : 'bg-secondary'"
+                >
+                  {{ user.active ? 'Active' : 'Inactive' }}
+                </span>
+              </td>
+              <td>
+                <button
+                  class="btn btn-outline-danger btn-sm rounded-pill me-2 px-3"
+                  (click)="deleteUser(user.id)"
+                >
+                  <i class="bi bi-trash3-fill"></i>
+                </button>
+
+                <!-- <button
+                  class="btn btn-outline-primary btn-sm rounded-pill me-2 px-3"
+                  (click)="changeRole(user.id)"
+                  [disabled]="user.role === 'ROLE_ADMIN'"
+                >
+                  <i class="bi bi-person-gear"></i>
+                </button>
+
+                <button
+                  class="btn btn-outline-warning btn-sm rounded-pill px-3"
+                  (click)="toggleStatus(user)"
+                >
+                  <i
+                    class="bi"
+                    [ngClass]="user.active ? 'bi-person-x-fill' : 'bi-person-check-fill'"
+                  ></i>
+                </button> -->
+                <button
+  class="btn btn-outline-primary btn-sm rounded-pill me-2 px-3"
+  (click)="changeRole(user.id)"
+  [disabled]="user.role === 'ROLE_ADMIN'"
+>
+  Make Admin
+</button>
+
+<button
+  class="btn btn-outline-warning btn-sm rounded-pill px-3"
+  (click)="toggleStatus(user)"
+>
+  {{ user.active ? 'Deactivate' : 'Activate' }}
+</button>
+
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ✅ No Users -->
+    <ng-template #noUsers>
+      <div class="text-center text-muted mt-4">
+        <i class="bi bi-emoji-frown fs-3 d-block mb-2"></i>
+        <p class="mb-0">No users found.</p>
+      </div>
+    </ng-template>
+  </div>
+</div>
+
+
+

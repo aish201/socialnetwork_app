@@ -1,0 +1,111 @@
+<div class="container-fluid vh-100 d-flex p-0">
+
+  <div class="col-md-6 d-none d-md-flex align-items-center justify-content-center p-0 bg-black position-relative">
+    <img src="assets/p3.jpg" alt="Join Lynk" class="bg-image">
+    <div class="overlay"></div>
+    <div class="text-overlay text-center">
+      <div class="text-bg-box">
+  <h2 class="fw-bold text-white mb-2">Welcome to Lynk!</h2>
+  <p class="text-white-50 small mb-0">Connect. Share. Grow your circle.</p>
+</div>
+
+    </div>
+  </div>
+
+  <div class="col-md-6 d-flex justify-content-center align-items-center bg-light p-0">
+    <div class="form-card shadow-lg rounded-5 p-5 bg-white">
+
+      <div class="text-center mb-4">
+        <img src="assets/l2.png" alt="Lynk" class="logo-img mb-3">
+        <h2 class="fw-bold mt-1 mb-2">Join <span class="text-gradient">Lynk</span></h2>
+        <p class="text-muted small">Create your account and start connecting instantly.</p>
+      </div>
+
+      <form (ngSubmit)="register()" novalidate>
+        <div class="form-floating mb-3">
+          <input type="text" class="form-control shadow-sm" id="username" [(ngModel)]="user.username" name="username" placeholder="Username" required>
+          <label for="username">Username</label>
+        </div>
+
+        <div class="form-floating mb-3">
+          <input type="email" class="form-control shadow-sm" id="email" [(ngModel)]="user.email" name="email" placeholder="Email" required>
+          <label for="email">Email</label>
+        </div>
+
+        <div class="form-floating mb-4">
+          <input type="password" class="form-control shadow-sm" id="password" [(ngModel)]="user.password" name="password" placeholder="Password" required>
+          <label for="password">Password</label>
+        </div>
+
+        <button type="submit" class="btn btn-gradient w-100 rounded-pill fw-semibold py-2 mb-3">
+          <i class="bi bi-person-plus me-2"></i> Create Account
+        </button>
+      </form>
+
+      <p class="text-muted small text-center mb-2">
+        By signing up, you agree to our
+        <a href="#" class="text-decoration-none text-gradient">Terms</a> and
+        <a href="#" class="text-decoration-none text-gradient">Privacy Policy</a>.
+      </p>
+
+      <p class="text-center mt-3">
+        <small>Already have an account?</small>
+        <a routerLink="/login" class="text-decoration-none fw-bold text-gradient"> Sign In</a>
+      </p>
+
+    </div>
+  </div>
+</div>
+<!-- <div class="auth-wrapper d-flex align-items-center justify-content-center">
+  
+  <img src="assets/p3.jpg" class="auth-bg" alt="Lynk Background">
+
+  <div class="form-card shadow-lg rounded-5 p-5 bg-white position-relative">
+    
+    <div class="text-center mb-4">
+      <img src="assets/l2.png" alt="Lynk" class="logo-img mb-2">
+      <h2 class="fw-bold mt-2 mb-1">Join <span class="text-gradient">Lynk</span></h2>
+      <p class="text-muted small">Create your account and start connecting instantly.</p>
+    </div>
+
+    <form (ngSubmit)="register()" novalidate>
+      <div class="form-floating mb-3">
+        <input type="text" class="form-control shadow-sm" id="username" [(ngModel)]="user.username" name="username" placeholder="Username" required>
+        <label for="username">Username</label>
+      </div>
+
+      <div class="form-floating mb-3">
+        <input type="email" class="form-control shadow-sm" id="email" [(ngModel)]="user.email" name="email" placeholder="Email" required>
+        <label for="email">Email</label>
+      </div>
+
+      <div class="form-floating mb-4">
+        <input type="password" class="form-control shadow-sm" id="password" [(ngModel)]="user.password" name="password" placeholder="Password" required>
+        <label for="password">Password</label>
+      </div>
+
+      <button type="submit" class="btn btn-gradient w-100 rounded-pill fw-semibold py-2 mb-3">
+        <i class="bi bi-person-plus me-2"></i> Create Account
+      </button>
+    </form>
+
+    <p class="text-center mt-3">
+      <small>Already have an account?</small>
+      <a routerLink="/login" class="text-decoration-none fw-bold text-gradient"> Sign In</a>
+    </p>
+
+  </div>
+
+</div>
+
+
+ -->
+
+
+
+
+
+
+
+
+

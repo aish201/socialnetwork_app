@@ -1,0 +1,60 @@
+<div class="container mt-5 search-container">
+
+  <!-- Search Bar -->
+  <div class="input-group search-bar mb-4 shadow-sm">
+    <input type="text"
+           class="form-control search-input"
+           placeholder="🔍 Search users by name or email..."
+           [(ngModel)]="keyword"
+           (keyup.enter)="search()">
+    <button class="btn btn-search" (click)="search()">Search</button>
+  </div>
+
+  <!-- Search Results -->
+  <div *ngIf="results.length > 0" class="fade-in">
+    <h5 class="mb-3 fw-bold text-dark">Results</h5>
+    <div class="list-group">
+      <a *ngFor="let user of results"
+         [routerLink]="['/user-profile', user.email]"
+         class="list-group-item list-group-item-action d-flex align-items-center gap-3 user-card">
+
+        <img [src]="user.profilePicUrl || 'assets/default_profile.png'"
+             alt="Profile"
+             class="rounded-circle profile-pic shadow-sm">
+
+        <div class="user-info">
+          <strong class="username">{{ user.username }}</strong><br>
+          <small class="text-muted">{{ user.email }}</small>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <!-- No Results -->
+  <div *ngIf="results.length === 0 && keyword" class="text-center text-muted fade-in mt-4">
+    <p><i class="bi bi-person-x"></i> No users found.</p>
+  </div>
+
+  <!-- Recent Searches -->
+  <div *ngIf="recentSearches.length > 0" class="mt-5 fade-in">
+    <h5 class="fw-bold text-secondary">Recent Searches</h5>
+    <div class="list-group">
+      <a *ngFor="let user of recentSearches"
+         [routerLink]="['/user-profile', user.email]"
+         class="list-group-item list-group-item-action d-flex align-items-center gap-3 user-card">
+        <img [src]="user.profilePicUrl || 'assets/default_profile.png'"
+             alt="Profile"
+             class="rounded-circle profile-pic shadow-sm">
+        <div class="user-info">
+          <strong class="username">{{ user.username }}</strong><br>
+          <small class="text-muted">{{ user.email }}</small>
+        </div>
+      </a>
+    </div>
+  </div>
+
+</div>
+
+
+
+

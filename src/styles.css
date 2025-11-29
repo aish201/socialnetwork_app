@@ -1,0 +1,128 @@
+/* You can add global styles to this file, and also import other style files */
+@import '~bootstrap/dist/css/bootstrap.min.css'
+/* @tailwind base;
+@tailwind components;
+@tailwind utilities; */
+
+/* Sidebar */
+/* Sidebar */
+.sidebar {
+  width: 260px;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 20px;
+}
+
+.sidebar-logo {
+  width: 54px;
+  height: 54px;
+  object-fit: contain;
+  filter: brightness(1.1);
+}
+
+/* Nav links */
+.nav-link {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  font-size: 16px;
+  border-radius: 10px;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.nav-link.active {
+  background-color: rgba(255, 255, 255, 0.18);
+}
+
+.nav-link:hover {
+  background-color: rgba(255, 255, 255, 0.12);
+  transform: translateX(4px);
+}
+
+/* Navbar */
+/* .custom-navbar {
+  height: 72px;
+  z-index: 10;
+  left: 260px;
+  right: 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 17px;
+}
+
+.navbar-logo {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  border-radius: 50%;
+} */
+/* Remove unwanted gap between navbar and sidebar */
+.custom-navbar {
+  margin-left: 260px; /* same width as sidebar */
+  width: calc(100% - 260px);
+  border-radius: 0;
+}
+
+/* Make sure navbar and sidebar connect smoothly */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 260px;
+  background-color: #111;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+/* Ensure main content starts exactly after sidebar */
+.main-content {
+  margin-left: 260px;
+  padding-top: 70px; /* Adjust for fixed navbar height */
+}
+
+/* Improve navbar look */
+.navbar-logo {
+  height: 40px;
+  width: 40px;
+}
+
+.navbar-brand {
+  letter-spacing: 0.5px;
+}
+
+/* Main content area */
+.main-content {
+  background-color: #f4f5f7;
+  min-height: 100vh;
+}
+
+.content-wrapper {
+  padding: 100px 50px 40px; /* pushes content below navbar */
+}
+
+/* Adjustments for responsiveness */
+@media (max-width: 992px) {
+  .sidebar {
+    width: 220px;
+  }
+
+  .custom-navbar {
+    left: 220px;
+  }
+
+  .nav-link {
+    font-size: 15px;
+  }
+
+  .content-wrapper {
+    padding: 80px 20px;
+  }
+}
+
+
+
+

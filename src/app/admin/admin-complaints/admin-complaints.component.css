@@ -1,0 +1,33 @@
+.table th, .table td {
+  vertical-align: middle !important;
+}
+
+select.form-select {
+  min-width: 130px;
+  text-align: center;
+}
+
+.badge {
+  font-size: 0.85rem;
+  padding: 0.4em 0.75em;
+}
+/* Ensure priority text is clearly visible */
+:host ::ng-deep .table .badge.bg-danger {
+  background-color: #dc3545 !important;
+  color: #fff !important;
+}
+
+:host ::ng-deep .table .badge.bg-warning {
+  background-color: #ffc107 !important;
+  color: #000 !important;
+}
+
+:host ::ng-deep .table .badge.bg-success {
+  background-color: #28a745 !important;
+  color: #fff !important;
+}
+/* 🔥 Urgent Priority Badge */
+:host ::ng-deep .table .badge.bg-dark {
+  background-color: #000 !important;
+  color: #fff !important;
+}

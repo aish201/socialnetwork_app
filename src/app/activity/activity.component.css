@@ -1,0 +1,85 @@
+.list-group-item {
+  transition: transform 0.2s ease-in-out, background-color 0.3s;
+}
+
+.list-group-item:hover {
+  transform: scale(1.02);
+  background-color: #f8f9fa !important;
+}
+
+img.rounded-circle {
+  object-fit: cover;
+}
+
+.btn-outline-primary {
+  border-radius: 20px;
+  padding: 3px 12px;
+}
+/* Container Styling */
+.container {
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Notification Card Styling */
+.list-group-item {
+  border: none;
+  background: #ffffff;
+  transition: all 0.25s ease;
+}
+
+.list-group-item:hover {
+  transform: translateY(-2px);
+  background: #f8f9fb;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+/* Profile Image */
+.list-group-item img {
+  width: 48px;
+  height: 48px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 2px solid #e0e0e0;
+}
+
+/* Notification Text */
+.list-group-item p {
+  margin-bottom: 2px;
+  font-size: 15px;
+  color: #212529;
+}
+
+.list-group-item small {
+  font-size: 13px;
+  color: #6c757d;
+}
+
+/* Bold unread notifications */
+.list-group-item.bg-light p {
+  font-weight: 600;
+}
+
+/* Mark All button */
+.btn-outline-primary {
+  border-radius: 20px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.btn-outline-primary:hover {
+  background-color: #007bff;
+  color: white;
+}
+
+/* Unread blue dot */
+.bg-primary {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+/* Empty state */
+.text-muted {
+  font-size: 15px;
+  opacity: 0.8;
+}

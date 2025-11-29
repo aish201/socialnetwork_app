@@ -1,0 +1,118 @@
+<div class="container my-5 d-flex justify-content-center"> 
+  <div style="max-width: 900px; width: 100%;">
+    <h4 class="mb-4 fw-bold text-dark">Hey {{ username }} 👋</h4>
+
+    <!-- Posts Feed -->
+    <div *ngFor="let post of posts" class="feed-card card border-0 shadow-sm rounded-4 mb-4 overflow-hidden">
+
+      <div class="card-body p-4">
+
+        <!-- User Info -->
+        <div class="d-flex align-items-center mb-3">
+          <img [src]="post.profilePicUrl || 'assets/default_profile.png'" alt="Profile"
+            class="rounded-circle me-3 border border-2 border-gradient shadow profile-pic"
+            style="width: 54px; height: 54px; object-fit: cover;">
+          <div>
+            <h6 class="fw-semibold mb-0 text-capitalize text-dark">{{ post.username }}</h6>
+            <small class="text-muted">{{ post.createdAt | date: 'short' }}</small>
+          </div>
+        </div>
+
+        <!-- Post Content -->
+        <p class="mb-3 text-dark fs-6 post-content">
+          {{ post.content }}
+        </p>
+
+        <!-- Post Image -->
+        <div *ngIf="post.imageUrl" class="text-center mb-3">
+          <img [src]="post.imageUrl" alt="Post Image" class="post-img img-fluid rounded-4 shadow-sm">
+        </div>
+
+        <!-- Like & Comment Buttons -->
+        <div class="d-flex justify-content-between align-items-center mt-3">
+          <div class="d-flex align-items-center gap-4">
+
+            <!-- Heart -->
+            <div class="d-flex align-items-center gap-1">
+              <i class="bi"
+                [ngClass]="post.liked ? 'bi-heart-fill text-danger animate-heart' : 'bi-heart text-secondary'"
+                style="font-size: 1.7rem; cursor: pointer;"
+                (click)="likePost(post)"></i>
+              <span class="fw-semibold text-muted">{{ post.likes ?? 0 }}</span>
+            </div>
+
+            <!-- Comment -->
+            <div class="d-flex align-items-center gap-1">
+              <i class="bi bi-chat-dots text-secondary" style="font-size: 1.6rem;"></i>
+              <span class="fw-semibold text-muted">{{ post.comments?.length || 0 }}</span>
+            </div>
+          </div>
+
+          <!-- Comment Button -->
+          <button class="btn btn-light border rounded-pill px-4 py-1 shadow-sm fw-semibold"
+            (click)="toggleEmojiPicker(post)">
+            Comment
+          </button>
+        </div>
+
+        <!-- Add Comment -->
+        <div class="mt-4">
+          <div class="d-flex align-items-center">
+            <input type="text" [(ngModel)]="post.newComment"
+              class="form-control comment-input rounded-pill border-0 shadow-sm me-2 px-3"
+              placeholder="Write a comment...">
+            <button class="send-btn" (click)="addComment(post)">
+              <i class="fa-regular fa-paper-plane"></i>
+            </button>
+          </div>
+
+          <!-- Emoji Picker -->
+          <div *ngIf="post.showEmojiPicker" class="mt-2 position-relative" style="z-index: 1000;">
+            <emoji-mart (emojiSelect)="addEmoji(post, $event)"></emoji-mart>
+          </div>
+        </div>
+
+        <!-- Comments Section -->
+        <div *ngIf="post.comments && post.comments.length > 0" class="mt-4">
+          <div *ngFor="let comment of post.comments.slice(0,3)"
+            class="comment-card bg-light border-0 rounded-4 shadow-sm p-3 mb-2">
+            <div class="d-flex align-items-start">
+              <img [src]="comment.profilePicUrl || 'assets/default_profile.png'" alt="Comment Author"
+                class="rounded-circle me-2 border border-2 border-primary shadow-sm"
+                style="width: 34px; height: 34px; object-fit: cover;">
+              <div>
+                <b class="text-dark">{{ comment.authorUsername }}</b>
+                <small class="text-muted d-block">{{ comment.createdAt | date:'short' }}</small>
+                <p class="mb-0 mt-1 text-dark">{{ comment.text }}</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- View All Comments -->
+          <div *ngIf="post.comments.length > 3" class="text-center mt-2">
+            <button class="btn btn-link fw-semibold text-primary p-0" data-bs-toggle="collapse"
+              [attr.data-bs-target]="'#commentCollapse' + post.id">View all comments</button>
+
+            <div class="collapse" [id]="'commentCollapse' + post.id">
+              <div *ngFor="let comment of post.comments.slice(3)"
+                class="comment-card bg-light border-0 rounded-4 shadow-sm p-3 mb-2">
+                <div class="d-flex align-items-start">
+                  <img [src]="comment.profilePicUrl || 'assets/default_profile.png'"
+                    class="rounded-circle me-2 border border-2 border-primary shadow-sm"
+                    style="width: 34px; height: 34px; object-fit: cover;">
+                  <div>
+                    <b class="text-dark">{{ comment.authorUsername }}</b>
+                    <small class="text-muted d-block">{{ comment.createdAt | date:'short' }}</small>
+                    <p class="mb-0 mt-1 text-dark">{{ comment.text }}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

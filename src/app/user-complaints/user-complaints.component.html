@@ -1,0 +1,41 @@
+<div class="container mt-4">
+  <h2 class="mb-3">My Complaints</h2>
+
+  <div *ngIf="complaints.length === 0" class="alert alert-info">
+    You have not submitted any complaints yet.
+  </div>
+
+  <table *ngIf="complaints.length > 0" class="table table-bordered table-striped">
+    <thead class="table-dark">
+      <tr>
+        <th>ID</th>
+        <th>Subject</th>
+        <th>Category</th>
+        <th>Priority</th>
+        <th>Description</th>
+        <th>Status</th>
+        <th>Created At</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let c of complaints">
+        <td>{{ c.id }}</td>
+        <td>{{ c.subject }}</td>
+        <td>{{ c.category }}</td>
+        <td>{{ c.priority }}</td>
+        <td>{{ c.description }}</td>
+        <td>
+          <span [ngClass]="{
+            'badge bg-warning': c.status === 'PENDING',
+            'badge bg-info': c.status === 'IN_PROGRESS',
+            'badge bg-success': c.status === 'RESOLVED',
+            'badge bg-secondary': c.status === 'CLOSED'
+          }">
+            {{ c.status }}
+          </span>
+        </td>
+        <td>{{ c.createdAt | date:'short' }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,174 @@
+<div class="d-flex" *ngIf="!isAuthPage()">
+  
+  <!-- Sidebar -->
+  <div *ngIf="!isAdmin" class="sidebar bg-dark text-white p-3">
+    <h4 class="text-center mb-4">
+      <img src="assets/l2.png" alt="Lynk Logo" class="sidebar-logo mb-2">
+      <div class="fw-semibold fs-4">Lynk</div>
+    </h4>
+
+    <ul class="nav flex-column">
+      <li class="nav-item mb-2">
+        <a class="nav-link text-white fs-6" routerLink="/dashboard" routerLinkActive="active">
+          <i class="bi bi-house-door me-3 fs-5"></i> Home
+        </a>
+      </li>
+
+      <li class="nav-item mb-2">
+        <a class="nav-link text-white fs-6" routerLink="/profile" routerLinkActive="active">
+          <i class="bi bi-person me-3 fs-5"></i> My Profile
+        </a>
+      </li>
+
+      <li class="nav-item mb-2">
+        <a class="nav-link text-white fs-6" routerLink="/search-users" routerLinkActive="active">
+          <i class="bi bi-search me-3 fs-5"></i> Search Users
+        </a>
+      </li>
+
+      <li class="nav-item mb-2">
+        <a class="nav-link text-white fs-6" routerLink="/activity" routerLinkActive="active" (click)="clearBadge()">
+          <span class="position-relative me-3">
+            <i class="bi bi-heart-fill fs-5"></i>
+            <span *ngIf="unreadCount > 0"
+              class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+              {{ unreadCount }}
+            </span>
+          </span>
+          Activity
+        </a>
+      </li>
+
+      <li class="nav-item mb-2">
+        <a class="nav-link text-white fs-6" routerLink="/report-issue" routerLinkActive="active">
+          <i class="bi bi-flag-fill me-3 fs-5 text-danger"></i> Report Issue
+        </a>
+      </li>
+
+      <li class="nav-item mb-2">
+        <a class="nav-link text-white fs-6" routerLink="/my-complaints" routerLinkActive="active">
+          <i class="bi bi-envelope-exclamation me-3 fs-5"></i> My Complaints
+        </a>
+      </li>
+
+      <li class="nav-item mt-3">
+        <a class="nav-link text-white fs-6" (click)="logout()" style="cursor: pointer;">
+          <i class="bi bi-box-arrow-right me-3 fs-5"></i> Logout
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main-content flex-grow-1" [style.margin-left]="isAdmin ? '0' : '260px'">
+
+    <!-- Navbar -->
+    <!-- <nav class="navbar navbar-dark bg-dark shadow-sm px-4 d-flex justify-content-between align-items-center fixed-top custom-navbar">
+      <div class="d-flex align-items-center">
+        <img src="assets/l2.png" alt="Lynk Logo" class="navbar-logo me-3">
+        <span class="navbar-brand mb-0 fs-4 fw-semibold text-white">Lynk</span>
+      </div>
+
+      <div class="d-flex align-items-center gap-4">
+        <a routerLink="/activity" class="text-white position-relative">
+          <i class="bi bi-bell-fill fs-4"></i>
+          <span *ngIf="unreadCount > 0"
+            class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+            {{ unreadCount }}
+          </span>
+        </a>
+        <a routerLink="/profile" class="text-white">
+          <i class="bi bi-person-circle fs-4"></i>
+        </a>
+      </div>
+    </nav> -->
+    <!-- Navbar (Hide for Admin) -->
+<!-- <nav *ngIf="!isAdmin" 
+     class="navbar navbar-dark bg-dark shadow-sm px-4 d-flex justify-content-between align-items-center fixed-top custom-navbar">
+  <div class="d-flex align-items-center">
+    <img src="assets/l2.png" alt="Lynk Logo" class="navbar-logo me-3">
+    <span class="navbar-brand mb-0 fs-4 fw-semibold text-white">Lynk</span>
+  </div>
+
+  <div class="d-flex align-items-center gap-4">
+    <a routerLink="/activity" class="text-white position-relative">
+      <i class="bi bi-bell-fill fs-4"></i>
+      <span *ngIf="unreadCount > 0"
+        class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+        {{ unreadCount }}
+      </span>
+    </a>
+    <a routerLink="/profile" class="text-white">
+      <i class="bi bi-person-circle fs-4"></i>
+    </a>
+  </div>
+</nav> -->
+<!-- Navbar (Hidden for Admin) -->
+<nav *ngIf="!isAdmin"
+     class="navbar navbar-dark bg-dark shadow-sm px-4 d-flex align-items-center fixed-top custom-navbar">
+
+  <!-- Left: Logo -->
+  <div class="d-flex align-items-center">
+    <img src="assets/l2.png" alt="Lynk Logo" class="navbar-logo me-3">
+    <span class="navbar-brand mb-0 fs-4 fw-semibold text-white">Lynk</span>
+  </div>
+
+  <!-- Right Side (Search + Notification + Profile) -->
+  <div class="d-flex align-items-center gap-4 ms-auto">
+
+    <div class="search-container">
+  <input type="text"
+         class="form-control"
+         placeholder="Search by username..."
+         [(ngModel)]="keyword"
+         (input)="searchUsers()"
+(keyup.enter)="openFirstUser()">
+
+  <div class="results-box" *ngIf="filteredUsers.length > 0">
+    <div class="user-item"
+     *ngFor="let user of filteredUsers"
+     (click)="selectSearchedUser(user)">
+  <img [src]="user.profilePicUrl || 'assets/default.png'" class="profile-pic">
+  <span class="username">{{ user.username }}</span>
+</div>
+
+  </div>
+</div>
+
+
+
+
+
+      <!-- Notification -->
+      <a routerLink="/activity" class="text-white position-relative">
+        <i class="bi bi-bell-fill fs-4"></i>
+        <span *ngIf="unreadCount > 0"
+              class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+          {{ unreadCount }}
+        </span>
+      </a>
+
+      <!-- Profile -->
+      <a routerLink="/profile" class="text-white">
+        <i class="bi bi-person-circle fs-4"></i>
+      </a>
+  </div>
+
+</nav>
+
+
+
+    <!-- Page Body -->
+    <div class="content-wrapper">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>
+
+<!-- Auth Pages -->
+<div *ngIf="isAuthPage()">
+  <router-outlet></router-outlet>
+</div>
+
+
+
