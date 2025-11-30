@@ -107,5 +107,4 @@ openFirstUser() {
     this.router.navigate(['/user-profile', user.email]);
   }
 }
-
 }
